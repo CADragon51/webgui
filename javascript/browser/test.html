@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
+
+// Start file download.
+function onclickbtn(){
+    // Generate download of hello.txt file with some content
+    var text = document.getElementById("export-data").value;
+    var filename = "hello.txt";
+    download(filename, text);
+}
+</script>
+</head>
+<body>
+
+<div id="wrapper">
+
+<span class="monitor-string"><textarea class="scrollabletextbox" id="export-data" rows="10" cols="40">TVRoZAAAAAYAAAABAcJNVHJrAAAAggD/UQMG3dAAkDBdAjJagWiAMkBMMECEA5A0RgIwVIIlgDRAHzBAhD+QNV8FMGWBf4A1QCgwQIR/kDdZDzBcgjeAN0A8MECEL5AwJw41PYJTgDVAGzBAhBGQNFAFMFWCIoA0QGUwQIN9kDBTDzJUgwuAMkAFMEAA/y8A</textarea><input type="button" id="dwn-btn" value="export" onclick="onclickbtn()"></span>
+
+</body>
+</html>

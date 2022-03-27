@@ -1,0 +1,68 @@
+{
+  "name": "rangeslider.js",
+  "title": "rangeslider.js",
+  "description": "Simple, small and fast jQuery polyfill for the HTML5 <input type=\"range\"> slider element",
+  "version": "2.3.3",
+  "codename": "Navy Blue",
+  "main": "dist/rangeslider.js",
+  "homepage": "https://github.com/andreruffert/rangeslider.js",
+  "author": {
+    "name": "André Ruffert",
+    "url": "http://andreruffert.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreruffert/rangeslider.js.git"
+  },
+  "keywords": [
+    "input",
+    "range",
+    "slider",
+    "rangeslider",
+    "rangeslider.js",
+    "polyfill",
+    "browser",
+    "jquery-plugin",
+    "ui"
+  ],
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/andreruffert/rangeslider.js/blob/master/LICENSE.md"
+  },
+  "bugs": {
+    "url": "https://github.com/andreruffert/rangeslider.js/issues"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "peerDependencies": {
+    "jquery": ">=1.9.0"
+  },
+  "devDependencies": {
+    "crayola": "0.0.1",
+    "grunt": "~0.4.5",
+    "grunt-bump": "0.3.1",
+    "grunt-contrib-compass": "~1.0.3",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-jshint": "~0.11.2",
+    "grunt-contrib-uglify": "~0.9.1",
+    "grunt-contrib-watch": "~0.6.1",
+    "http-server": "^0.8.0",
+    "jshint-stylish": "~2.0.1",
+    "live-reload": "^1.1.0",
+    "load-grunt-tasks": "~3.2.0",
+    "parallelshell": "^2.0.0",
+    "time-grunt": "~1.2.1"
+  },
+  "scripts": {
+    "test": "grunt jshint",
+    "static-server": "http-server -p 8080 ./ -s -o",
+    "livereload": "live-reload --port 8081 dist/",
+    "serve": "parallelshell 'npm run static-server' 'npm run livereload' 'grunt watch'",
+    "start": "grunt build && npm run serve -s",
+    "build": "grunt build"
+  },
+  "files": [
+    "dist"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+	"name": "webgui-node",
+	"description": "Arduino Web Graphic User Interface",
+	"author": "Nil Sanz",
+	"version": "0.0.1",
+	"dependencies": {
+		"js-file-download": "^0.4.12",
+		"rangeslider.js": "^2.3.3",
+		"socket.io": "^4.4.1"
+	}
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TMS Web Graphic User Interface</title>
+
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" type="text/css" href="jquery-ui.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css" rel="stylesheet" type=&quot;text/css&quot;/>
+
+	<script type="text/javascript" src="cross-browser-adapter.js"></script>
+	<script type="text/javascript" src="jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="jquery-ui.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="board.js"></script>
+	<script type="text/javascript" src="queue.js"></script>
+	<script type="text/javascript" src="myutilities.js"></script>
+	<script type="text/javascript" src="node-communication.js"></script>
+	<script type="text/javascript" src="dom.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+	<script>
+// Warning before leaving the page (back button, or outgoinglink)
+window.onbeforeunload = function() {
+   return "Do you really want to leave TMS Web?";
+   //if we return nothing here (just calling return;) then there will be no pop-up question at all
+   //return;
+};
+function readFile(file) {
+  return new Promise((resolve, reject) => {
+    let fr = new FileReader();
+    fr.onload = x=> resolve(fr.result);
+    fr.readAsBinaryString(file);
+})}
+
+async function read(input) {
+  importbox.innerText = btoa(await readFile(input.files[0]));
+}
+
+
+
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:application/octet-stream,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
+
+function onclickbtn(){
+    // Generate download of hello.txt file with some content
+    var text = atob(document.getElementById("export-data").value);
+    var filename =document.getElementById("export-data").name;
+    download(filename, text);
+}
+</script>
+</head>
+<body>
+
+<div id="wrapper">
+
+<div id="header"  color="white">
+	<h4>TMS Web GUI</h4>
+	<div id="connexion-status">
+		<div class="circle disconnected"></div>
+		<span>CONNECTION</span>
+	</div>
+</div>
+<div id="body">
+  <body>
+
+
+
+
+</body>
+</div>
+</html>

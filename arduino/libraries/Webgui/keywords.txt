@@ -1,0 +1,35 @@
+#######################################
+# Syntax Coloring Map For Webgui
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Webgui	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+addButtons	KEYWORD2
+addInputAnalog	KEYWORD2
+addInputString	KEYWORD2
+addLED	KEYWORD2
+addNeedleIndicator	KEYWORD2
+addNumericDisplay	KEYWORD2
+addOptions	KEYWORD2
+addStringDisplay	KEYWORD2
+addSwitches	KEYWORD2
+connect	KEYWORD2
+connected	KEYWORD2
+remove	KEYWORD2
+reset	KEYWORD2
+setMonitor	KEYWORD2
+update	KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+

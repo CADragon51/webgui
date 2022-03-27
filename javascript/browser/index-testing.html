@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Arduino Web Graphic User Interface</title>
+
+	<!-- Application functional files -->
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" type="text/css" href="jquery-ui.css">
+	<script type="text/javascript" src="cross-browser-adapter.js"></script>
+	
+	<script type="text/javascript" src="jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="jquery-ui.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="board.js"></script>
+	<script type="text/javascript" src="queue.js"></script>
+	<script type="text/javascript" src="node-communication.js"></script>
+	<script type="text/javascript" src="dom.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+	<!-- / Application functional code -->
+
+	<!-- Testing files -->
+	<link rel="stylesheet" type="text/css" href="mocha.css" />
+	<script type="text/javascript" src="mocha.js"></script>
+	<script type="text/javascript" src="chai.js"></script>
+	<script type="text/javascript" src="sinon-1.4.2.js"></script>
+	<script type="text/javascript" src="mediator.js"></script>
+	<script type="text/javascript" src="myutilities.js"></script>
+	<script type="text/javascript" src="test.js"></script>
+	<!-- / Testing files -->
+</head>
+<body>
+<div id="wrapper">
+
+<div id="header">
+	<h1>Arduino Web Graphic User Interface</h1>
+	<div id="connexion-status">
+		<div class="circle disconnected"></div>
+		<span>CONNEXION</span>
+	</div>
+	<button onClick="Testing.run()">Run Tests</button>
+</div>
+<div id="body">
+</div>
+
+</div>
+</body>
+</html>

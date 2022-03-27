@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Starting WEBGUI interface</title>
+<style>
+body{
+	width: 500px;
+	margin: auto;
+	background-color: #ccf;
+}
+h1{
+	margin-bottom: 100px;
+}
+span{
+	font-size: 1.5em;
+	margin: auto;
+	display: block;
+}
+input{
+	width: 400px;
+	border-radius: 5px;
+	margin-top: 20px;
+}
+button{
+	width: 240px;
+	height: 100px;
+	margin: auto;
+	margin-top: 60px;
+	display: block;
+}
+</style>
+</head>
+<body>
+<h1>Starting WEBGUI interface</h1>
+<span>Specify the HTTP port number: </span>
+<input type="text" value="80" />
+<button>OPEN WEBGUI INTERFACE</button>
+<script type="text/javascript">
+	document.querySelector('button').addEventListener('click', function(){
+		var nPort = 1*document.querySelector('input').value;
+		if (nPort > 0){
+			document.location.assign('http://localhost:'+nPort);
+		}
+	}, false);
+</script>
+</body>
+</html>
+
