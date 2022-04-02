@@ -35,11 +35,18 @@ async function read(input) {
   importbox.innerText = btoa(await readFile(input.files[0]));
 }
 
-
+function base64ToArrayBuffer(text){
+var bstring=window.atob(text);
+var bytes=new Uint8Array(bstring.length);
+return bytes.map((byte,i)=>bstring.charCodeAt(i));
+}
 
 function download(filename, text) {
+	var arrayBuffer=base64ToArrayBuffer(text);
+	var blob=new Blob([arrayBuffer]);
     var element = document.createElement('a');
-    element.setAttribute('href', 'data:application/octet-stream,' + encodeURIComponent(text));
+	var url=URL.createObjectURL(blob);
+    element.setAttribute('href', url);
     element.setAttribute('download', filename);
 
     element.style.display = 'none';
@@ -52,8 +59,8 @@ function download(filename, text) {
 
 function onclickbtn(){
     // Generate download of hello.txt file with some content
-    var text = atob(document.getElementById("export-data").value);
-    var filename =document.getElementById("export-data").name;
+     var text = document.getElementById("export-data").value;
+     var filename =document.getElementById("export-data").name;
     download(filename, text);
 }
 </script>
