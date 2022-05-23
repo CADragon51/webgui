@@ -165,11 +165,12 @@ div.control input [type="range"]  {
 	font-family: metrico;
 	font: 20px;
 }
-.scrollabletextbox{
+.scrollabletextboxx{
 width:1050px;
 height:150px;
-line-height:1em;
+line-height:3em;
 overflow:auto;
+padding:5px;
 border:6px ridge #0875e5;
 
 }
@@ -511,8 +512,7 @@ font-weight: bold;
 color:white;
 }
 .small { font: italic 14px sans-serif; }  
-.tiny { font: italic 8px sans-serif; } 
-.teeny { font: 11px sans-serif; }  
+.tiny { font: italic 8px sans-serif; }  
 .flat { font-size: 26px ;font-family: 'Music'; color:white; } 
 .note { font-size: 26px;font-family: 'Music'; color:white; }
 .clef { font-size: 40px;font-family: 'Music';color:white; } 

@@ -41,6 +41,7 @@ var start = function(nPort, fnCallback){
 			oResponse.writeHead(nStatusCode, "Content-Type:text/html");
 			oResponse.end(bufContent);
 		};
+		console.log('HTTP server request '+url.parse(oRequest.url).pathname);
 		controller.onRequest(oRequest, sendResponse);
 	});
 	exports.oServer = oHTTPServer; //update the reference since a new object has been created

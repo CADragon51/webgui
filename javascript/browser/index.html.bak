@@ -82,7 +82,7 @@ function onclickbtn(filename){
   <body>
 
 <span class="monitor-string"> 
-<svg height="40" width="300"><text x="100" y="15" fill="white" class="tiny">40/28</text>
+<svg height="40" width="300"><text x="100" y="15" fill="white" class="small">40/28</text>
 </svg></span>
 
 
