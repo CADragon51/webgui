@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>TMS Web Graphic User Interface</title>
 
@@ -57,10 +58,10 @@ function download(filename, text) {
     document.body.removeChild(element);
 }
 
-function onclickbtn(){
+function onclickbtn(filename){
     // Generate download of hello.txt file with some content
      var text = document.getElementById("export-data").value;
-     var filename =document.getElementById("export-data").name;
+//     var filename =document.getElementById("export-data").name;
     download(filename, text);
 }
 </script>
@@ -74,10 +75,15 @@ function onclickbtn(){
 	<div id="connexion-status">
 		<div class="circle disconnected"></div>
 		<span>CONNECTION</span>
+		
 	</div>
 </div>
 <div id="body">
   <body>
+
+<span class="monitor-string"> 
+<svg height="40" width="300"><text x="100" y="15" fill="white" class="tiny">40/28</text>
+</svg></span>
 
 
 

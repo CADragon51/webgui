@@ -141,7 +141,7 @@ var _onNewMessage = function(oData, oBrowser){
 				arduino.send(sArduinoCommand+'\n');
 			else
 			{
-				arduino.send(sArduinoCommand.substring(0,10000)+'\n');
+				arduino.send(JSON.stringify(sArduinoCommand)+","+sArduinoCommand.substring(0,10000)+'\n');
 				arduino.send(sArduinoCommand.substring(10000,20000)+'\n');
 				if(sArduinoCommand.length>20000)
 				arduino.send(sArduinoCommand.substring(20000,30000)+'\n');
