@@ -122,6 +122,7 @@ var _onNewMessage = function(oData, oBrowser){
 				}
 				sArduinoCommand += ''+oData.sWitch;
 				oMods = {'sId': oData.sId, 'value': ''+oData.sWitch};
+	//			console.log(oData.sWitch);
 			}
 			else if(oControl.sType === "buttons"){
 				sArduinoCommand += oData.sWitch;

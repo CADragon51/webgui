@@ -119,6 +119,9 @@ var onNewMessage = function(sData){
 			AddControl: /^ADD_CONTROL:([a-zA-Z0-9])+,`[^\`\t\r\n\v\f]+`,(\b(buttons|switches|analog|string|options)\b)(,[^\t\r\n\v\f]+)*(\r\n|\n)$/,
 			AddMonitor: /^ADD_MONITOR:([a-zA-Z0-9])+,`[^\`\t\r\n\v\f]+`,(\b(boolean|analog|digital|string)\b)(,[0-9,\.\-]+)?(\r\n|\n)$/,
 			SetMonitor: /^SET_MONITOR:([a-zA-Z0-9])+,(on|off|`[^\`\t\r\n\v\f]*`|[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)(\r\n|\n)$/,
+			SetMonitor1: /^SET_MONITOR1:([a-zA-Z0-9])+,(on|off|`[^\`\t\r\n\v\f]*`|[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)(\r\n|\n)$/,
+			SetMonitor2: /^SET_MONITOR2:([a-zA-Z0-9])+,(on|off|`[^\`\t\r\n\v\f]*`|[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)(\r\n|\n)$/,
+			SetMonitor3: /^SET_MONITOR3:([a-zA-Z0-9])+,(on|off|`[^\`\t\r\n\v\f]*`|[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)(\r\n|\n)$/,
 			Remove: /^REMOVE:([a-zA-Z0-9])+(\r\n|\n)$/,
 			Reset: /^RESET(\r\n|\n)$/
 		};
@@ -759,6 +762,10 @@ var sw= "stroke-width=\"1 \" fill = \"none\" stroke=\"white\"";
   </g>
 </svg>
 `;
+var isCollecting=false;
+var collmsg="";
+var gsId = 0;
+
 var newCommand = function(sMessage, sType){
 	try{
 		if (sType === 'Reset'){
@@ -794,27 +801,78 @@ var newCommand = function(sMessage, sType){
 		sMessage = sMessage.replaceAll('~','\n');	
 		sMessage=sMessage.replace("`,options127,",longopt);
 
-		var sId = /^([a-zA-Z0-9])+/.exec(sMessage)[0];
+        var c1=sMessage.indexOf("`");
+        var c2=sMessage.lastIndexOf("`");
+		if(sType === 'SetMonitor1'||sType === 'SetMonitor2'||sType === 'SetMonitor3')
+		{
+	//		console.log(sType);
+			if(sType === 'SetMonitor1')
+			{
+				var x=sMessage.indexOf(":");
+				var y=sMessage.indexOf(",");
+				collmsg=sMessage.substring(0,c2).replace('SET_MONITOR1','SET_MONITOR');
+				if(x>-1)
+				{
+					gsId = sMessage.substring(x+1,y);
+				}
+				isCollecting=true;
+	//				console.log(collmsg);
+			return;
+			}
+			if(sType === 'SetMonitor2')
+			{
+				collmsg+=sMessage.substring(c1+1,c2);
+	//				console.log(collmsg);
+				
+				return;
+			}
+			if(sType === 'SetMonitor3')
+			{
+				collmsg+=sMessage.substring(c1+1,c2+1);
+				sType='SetMonitor';
+				var s1=collmsg.indexOf('`');
+				if(s1>-1)
+					sMessage=collmsg.substring(s1);	
+				else
+					sMessage=collmsg;
+	//			console.log(sMessage);
+			}
+		}
+		var sId = 0;
+		if(!isCollecting)
+			sId=/^([a-zA-Z0-9])+/.exec(sMessage)[0];
+
 		if (sType === 'Remove'){
 			board.deleteById(sId);
 			browser.send({'sCommand': 'remove', 'sId': sId});
 			return true;
 		}
-		sMessage = sMessage.replace(/^([a-zA-Z0-9])+,/, ''); //remove id+","
+		if(isCollecting)
+		{
+			sId=gsId;
+			collmsg="";
+		}
+		else
+		{
+			sMessage = sMessage.replace(/^([a-zA-Z0-9])+,/, ''); //remove id+","
+		}
 		sMessage = sMessage.replace(/[\s]+$/, ''); //remove the final newlines
+
 		if (sType === 'SetMonitor'){
 			var sElemType = board.getElementById(sId) && board.getElementById(sId).sType;
+			isCollecting=false;
 			if (!sElemType){
 //				oSocket.write('ERROR:The id '+sId+' does not exist\n');
+//				console.log('ERROR:The id '+sId+' does not exist\n');
 				return;
 			}
 			var oMods = {'sId': sId};
 			if (sElemType === 'boolean'){
 				oMods.value = (sMessage === "on");
 			}
-			else if (sElemType in {'string':0, 'scrollabletextbox':0,'digital':0}){
+			else if (sElemType in {'string':0,'digital':0}){
 				oMods.value = sMessage.replace(/`/g, ''); //remove grave accents. g: global to delete all matches
-			}
+		}
 			else {
 				oMods.value = parseFloat(sMessage);
 			}
@@ -822,6 +880,7 @@ var newCommand = function(sMessage, sType){
 			browser.send({'sCommand': 'update', 'oModifications': oMods});
 			return true;
 		}
+
 		var oNewElement = {'sId': sId};
 		oNewElement.sName = /`[^\`\t\r\n\v\f]+`/.exec(sMessage)[0].slice(1, -1); //get the name field
 		sMessage = sMessage.replace(/`[^\`\t\r\n\v\f]+`,/, ''); //remove name+","
@@ -850,6 +909,7 @@ var newCommand = function(sMessage, sType){
 		}
 		//sType is AddControl
 		oNewElement.sTypeOfElement = 'control';
+
 		if (oNewElement.sType === 'buttons'){
 			oNewElement.asButtons = [];
 			while (aux = /^`[^`]+`/.exec(sMessage)){ //while there are buttons inside sMessage. exec returns null or a non-empty array
@@ -865,6 +925,7 @@ var newCommand = function(sMessage, sType){
 				sMessage = sMessage.replace(/^`[^`]+`/, ''); //remove the first option with grave accents
 				sMessage = sMessage.replace(/^,/, ''); //remove the first ','
 			}
+
 			oNewElement.value = "0";
 		}
 		else if (oNewElement.sType === 'switches'){

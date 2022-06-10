@@ -166,10 +166,17 @@ div.control input [type="range"]  {
 	font: 20px;
 }
 .scrollabletextbox{
-width:1050px;
+width:800px;
 height:150px;
 line-height:1em;
-overflow:auto;
+//overflow:auto;
+border:6px ridge #0875e5;
+
+}.scrollabletextboxex{
+width:400px;
+height:150px;
+line-height:1em;
+
 border:6px ridge #0875e5;
 
 }
@@ -206,6 +213,17 @@ transform: scale(1, 1.25);
  transform: rotate(90deg);
  font: 18px sans-serif ;
 }
+.redhide  {
+   background:none;
+    color:red;
+//	padding: 5px;
+	border: none;
+	display:inline;
+//    color:#0855b5;
+	font: 16px sans-serif ;
+//		z-index: 3;
+
+}
 .hide  {
    background:none;
     color:#fff;
@@ -217,7 +235,10 @@ transform: scale(1, 1.25);
 //		z-index: 3;
 
 }
-.hide:hover{
+.redhide:hover{
+  font: 18px sans-serif;
+//  background: blue;
+}.hide:hover{
   font: 18px sans-serif;
 //  background: blue;
 }

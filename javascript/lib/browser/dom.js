@@ -34,7 +34,7 @@ var oDom = (function(){
 				
 			for (i = 0; i < oElement.asButtons.length; i++) { //for each button
 				eButton = document.createElement('button');
-			if(className=="rot"||className=="hide"||className=="synth"||className=="smallhide")
+			if(className=="rot"||className=="hide"||className=="redhide"||className=="synth"||className=="smallhide")
 				eButton.className = className;
 			else
 				eButton.className = "btn"+eDiv.id+i;
@@ -170,7 +170,7 @@ var oDom = (function(){
 				eOption.value = ''+i;
 				eOption.innerHTML = oElement.asOptions[i];
 				eInput.appendChild(eOption);
-//				console.log(eInput.innerHTML );
+				console.log(eInput.innerHTML );
 			}
 			eInput.value = oElement.value;
 			eInput.innerHTML=eInput.innerHTML.replace('value="'+selopt+'"','selected="true" value="'+selopt+'"');
