@@ -564,7 +564,7 @@ var settings=`<svg
        id="rect860-4"
        width="73"
        height="70"
-       x="55"
+       x="65"
        y="-24"
        rx="2"
        ry="2" />
@@ -573,7 +573,7 @@ var settings=`<svg
        id="rect860"
        width="75"
        height="72"
-       x="54"
+       x="64"
        y="-25"
        rx="2"
        ry="2" />
@@ -600,7 +600,7 @@ var settings=`<svg
        id="rect860-4"
        width="320"
        height="75"
-       x="55"
+       x="65"
        y="51"
        rx="2"
        ry="2" />
@@ -609,7 +609,7 @@ var settings=`<svg
        id="rect860"
        width="322"
        height="77"
-       x="54"
+       x="64"
        y="50"
        rx="2"
        ry="2" />
@@ -789,15 +789,14 @@ var newCommand = function(sMessage, sType){
 		sMessage = sMessage.replaceAll('_blur_',blur);
 		sMessage = sMessage.replaceAll('_blur2_',blur2);
 		sMessage = sMessage.replaceAll('_r1_',r1);
-		sMessage = sMessage.replaceAll('_n_',notew);
-		sMessage = sMessage.replaceAll('_f_',noteb);
-		sMessage = sMessage.replaceAll('_s_',notes);
-		sMessage = sMessage.replaceAll('_c_',ctext);
-		sMessage = sMessage.replaceAll('_t_',ttext);
-		sMessage = sMessage.replaceAll('_u_',utext);
-		sMessage = sMessage.replaceAll('_x_',tx);
-		sMessage = sMessage.replaceAll('_y_',ty);
-		sMessage = sMessage.replaceAll('_w_',sw);
+		sMessage = sMessage.replaceAll('_n@',notew);
+		sMessage = sMessage.replaceAll('_f@',noteb);
+		sMessage = sMessage.replaceAll('_s@',notes);
+		sMessage = sMessage.replaceAll('_c@',ttext);
+		sMessage = sMessage.replaceAll('_u@',utext);
+		sMessage = sMessage.replaceAll('_x@',tx);
+		sMessage = sMessage.replaceAll('_y@',ty);
+		sMessage = sMessage.replaceAll('_w@',sw);
 		sMessage = sMessage.replaceAll('~','\n');	
 		sMessage=sMessage.replace("`,options127,",longopt);
 
@@ -870,9 +869,15 @@ var newCommand = function(sMessage, sType){
 			if (sElemType === 'boolean'){
 				oMods.value = (sMessage === "on");
 			}
-			else if (sElemType in {'string':0,'digital':0}){
+			if(sId=='170')
+			{
+				console.log(sId);
+				console.log(sElemType);
+				console.log(sMessage);
+			}
+			if (sElemType in {'string':0,'digital':0}){
 				oMods.value = sMessage.replace(/`/g, ''); //remove grave accents. g: global to delete all matches
-		}
+			}
 			else {
 				oMods.value = parseFloat(sMessage);
 			}

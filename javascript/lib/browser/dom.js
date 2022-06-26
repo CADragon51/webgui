@@ -168,7 +168,14 @@ var oDom = (function(){
 //					eInput.innerHTML = '<option selected=true;value="'+i+'">'+oElement.asOptions[i]+'</option>'; //FAILS IN IE
 				var eOption = document.createElement('option');
 				eOption.value = ''+i;
-				eOption.innerHTML = oElement.asOptions[i];
+				if(oElement.asOptions[i].indexOf("_")==0)
+				{
+					eOption.style="color:yellow";
+					eOption.disabled=true;
+					eOption.innerHTML =oElement.asOptions[i].substring(1);
+				}
+				else
+					eOption.innerHTML =oElement.asOptions[i];
 				eInput.appendChild(eOption);
 				console.log(eInput.innerHTML );
 			}
