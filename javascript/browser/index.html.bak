@@ -76,6 +76,9 @@ function onclickbtn(filename){
 <div id="body">
   <body>
 
+<div id="16" class="control buttons" style="position: absolute; left: 100px; top: 780px;"><button class="btn160" type="button"> <span class="glyphicon">&#xe016;</span></button></div>
+
+
 
 
 </body>

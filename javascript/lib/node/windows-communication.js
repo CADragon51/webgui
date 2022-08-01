@@ -84,7 +84,7 @@ var start = function(nPort){
 			browser.send({sCommand: 'connexion', bStatus: false});
 		});
 	});
-	setInterval(udpconnect, 1500);
+//	setInterval(udpconnect, 1500);
 	oTCPServer.listen(nPort, function() { //'listening' listener
 		console.log('TCP server listening on port '+nPort);
 	});
@@ -106,8 +106,8 @@ var send = function(sMessage){
  * correct command.
  * @param {string} sData is the data that server receives.
  */
-//var longopt="options,`[Racktom 1]`,`[Racktom 2]`,`[Racktom 2]`,`[Floortom 1]`,`[Floortom 1]`,`[Snare]`,`hatsTrig`,`hatsTipTrig`,`hatsTipTrig`,`Closed Pedal`,`Closed`,`Open 1`,`Open 1`,`Open 2`,`Open 2`,`Open 3`,`Open 3`,`hatsTrig`,`hatsTipTrig`,`hatsTipTrig`,`Closed Pedal`,`Closed`,`Open Pedal`,`Open 1`,`Open 2`,`Open 3`,`[Crash A]`,`[Crash A]`,`[Crash A]`,`[Crash B]`,`[Crash B]`,`Metronome Click`,`Metronome Bell`,`Acoustic Bass Drum`,`Bass Drum 1`,`Side Stick`,`Acoustic Snare`,`Hand Clap`,`Electric Snare`,`Low Floor Tom`,`Closed Hi-Hat`,`High Floor Tom`,`Pedal Hi-Hat`,`Low Tom`,`Open Hi-Hat`,`Low-Mid Tom`,`Hi-Mid Tom`,`Crash Cymbal 1`,`High Tom`,`Ride Cymbal 1`,`Chinese Cymbal`,`Ride Bell`,`Tambourine f#`,`Splash Cymbal`,`Cowbell `,`Crash Cymbal 2`,`Vibraslap x`,`Ride Cymbal 2`,`Hi Bongo`,`Low Bongo`,`Mute Hi Conga`,`Open Hi Conga`,`Low Conga`,`High Timbale`,`Low Timbale`,`High Agogo`,`Low Agogo`,`Cabasa `,`Maracas `,`Short Whistle`,`Long Whistle`,`Short Guiro`,`Long Guiro`,`Claves `,`Hi Wood Block`,`Low Wood Block`,`Mute Cuica`,`Open Cuica`,`Mute Triangle`,`Open Triangle`,`Flams`,`Crescendo`,`Left Brush Hit`,`Right Brush Hit`,`Right Brushed`,`Left Brushed`,`Slap Crescendo`,`Right Muted`,`Right Open`,`Right BassTone`,`Left Open Slap`,`Right Open Slap`,`Left Closed Slap`,`Right Closed Slap`,`Left Heel`,`Right Heel`,`Crescendo`,`Flams`,`Slap Flams`,`FX`,`c2Left Open`,`c2Right Open`,`c2Left Muted`,`c2Right Muted`,`c2Left BassTone`,`c2Right BassTone`,`c2Crescendo`,`c2Flams`,`c2FX`,`c2Left Open`,`c2Right Open`,`c2Left Muted`,`c2Right Muted`,`c2Left BassTone`,`c2Right BassTone`,`c2Crescendo`,`c2Flams`,`[Bells] Crescendo`,`[Cymbal 1] *Crescendo`,`[Waterfall] Crescendo`,`[Cymbal 2] Crescendo`,`[Crickets] Crescendo`,`[Shekere] Beat`,`[Shekere] Off Beat`,`[Shekere] On Beat`,`[Shekere] Shakings`";
-var longopt="options,`0`,`1`,`2`,`3`,`4`,`5`,`6`,`7`,`8`,`9`,`10`,`11`,`12`,`13`,`14`,`15`,`16`,`17`,`18`,`19`,`20`,`21`,`22`,`23`,`24`,`25`,`26`,`27`,`28`,`29`,`30`,`31`,`32`,`33`,`34`,`35`,`36`,`37`,`38`,`39`,`40`,`41`,`42`,`43`,`44`,`45`,`46`,`47`,`48`,`49`,`50`,`51`,`52`,`53`,`54`,`55`,`56`,`57`,`58`,`59`,`60`,`61`,`62`,`63`,`64`,`65`,`66`,`67`,`68`,`69`,`70`,`71`,`72`,`73`,`74`,`75`,`76`,`77`,`78`,`79`,`80`,`81`,`82`,`83`,`84`,`85`,`86`,`87`,`88`,`89`,`90`,`91`,`92`,`93`,`94`,`95`,`96`,`97`,`98`,`99`,`100`,`101`,`102`,`103`,`104`,`105`,`106`,`107`,`108`,`109`,`110`,`111`,`112`,`113`,`114`,`115`,`116`,`117`,`118`,`119`,`120`,`121`,`122`,`123`,`124`,`125`,`126`,`127`,";var onNewMessage = function(sData){
+var longopt="options,`[Racktom 1]`,`[Racktom 2]`,`[Racktom 2]`,`[Floortom 1]`,`[Floortom 1]`,`[Snare]`,`hatsTrig`,`hatsTipTrig`,`hatsTipTrig`,`Closed Pedal`,`Closed`,`Open 1`,`Open 1`,`Open 2`,`Open 2`,`Open 3`,`Open 3`,`hatsTrig`,`hatsTipTrig`,`hatsTipTrig`,`Closed Pedal`,`Closed`,`Open Pedal`,`Open 1`,`Open 2`,`Open 3`,`[Crash A]`,`[Crash A]`,`[Crash A]`,`[Crash B]`,`[Crash B]`,`Metronome Click`,`Metronome Bell`,`Acoustic Bass Drum`,`Bass Drum 1`,`Side Stick`,`Acoustic Snare`,`Hand Clap`,`Electric Snare`,`Low Floor Tom`,`Closed Hi-Hat`,`High Floor Tom`,`Pedal Hi-Hat`,`Low Tom`,`Open Hi-Hat`,`Low-Mid Tom`,`Hi-Mid Tom`,`Crash Cymbal 1`,`High Tom`,`Ride Cymbal 1`,`Chinese Cymbal`,`Ride Bell`,`Tambourine f#`,`Splash Cymbal`,`Cowbell `,`Crash Cymbal 2`,`Vibraslap x`,`Ride Cymbal 2`,`Hi Bongo`,`Low Bongo`,`Mute Hi Conga`,`Open Hi Conga`,`Low Conga`,`High Timbale`,`Low Timbale`,`High Agogo`,`Low Agogo`,`Cabasa `,`Maracas `,`Short Whistle`,`Long Whistle`,`Short Guiro`,`Long Guiro`,`Claves `,`Hi Wood Block`,`Low Wood Block`,`Mute Cuica`,`Open Cuica`,`Mute Triangle`,`Open Triangle`,`Flams`,`Crescendo`,`Left Brush Hit`,`Right Brush Hit`,`Right Brushed`,`Left Brushed`,`Slap Crescendo`,`Right Muted`,`Right Open`,`Right BassTone`,`Left Open Slap`,`Right Open Slap`,`Left Closed Slap`,`Right Closed Slap`,`Left Heel`,`Right Heel`,`Crescendo`,`Flams`,`Slap Flams`,`FX`,`c2Left Open`,`c2Right Open`,`c2Left Muted`,`c2Right Muted`,`c2Left BassTone`,`c2Right BassTone`,`c2Crescendo`,`c2Flams`,`c2FX`,`c2Left Open`,`c2Right Open`,`c2Left Muted`,`c2Right Muted`,`c2Left BassTone`,`c2Right BassTone`,`c2Crescendo`,`c2Flams`,`[Bells] Crescendo`,`[Cymbal 1] *Crescendo`,`[Waterfall] Crescendo`,`[Cymbal 2] Crescendo`,`[Crickets] Crescendo`,`[Shekere] Beat`,`[Shekere] Off Beat`,`[Shekere] On Beat`,`[Shekere] Shakings`";
+var onNewMessage = function(sData){
 	sStream += sData;
 	var sMessage, aMsg;
 	var analizeMessage = function(sMsg){
@@ -135,7 +135,7 @@ var longopt="options,`0`,`1`,`2`,`3`,`4`,`5`,`6`,`7`,`8`,`9`,`10`,`11`,`12`,`13`
 			}
 		}
 		console.log('Syntax error in arduino message: '+JSON.stringify(sMsg));
-	//	oSocket.end('ERROR:syntax\n');
+		oSocket.end('ERROR:syntax\n');
 	};
 	while(sStream){
 		sStream = sStream.replace(/^(\r\n|\n)*/g, ''); //delete initial new lines
@@ -553,50 +553,6 @@ var extern=`<svg
 	   </g>
 </svg>
 `;
-var rhythm=`<svg
-   width="500mm"
-   height="210mm"
-   viewBox="0 0 500 210"
->
-<g  transform="translate(-15, 27)" >
-<rect
-       style="display:inline;opacity:0.888073;fill:none;fill-rule:evenodd;stroke:#00090a;stroke-width:0.8;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
-       id="rect860-4"
-       width="360"
-       height="90"
-       x="78"
-       y="-24"
-       rx="2"
-       ry="2" />
-    <rect
-       style="opacity:0.537615;fill:none;fill-rule:evenodd;stroke:#f5f5ff;stroke-width:0.8;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
-       id="rect860"
-       width="362"
-       height="92"
-       x="77"
-       y="-25"
-       rx="2"
-       ry="2" />
-   	<rect
-       style="display:inline;opacity:0.888073;fill:none;fill-rule:evenodd;stroke:#00090a;stroke-width:0.8;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
-       id="rect860-4"
-       width="320"
-       height="75"
-       x="78"
-       y="75"
-       rx="2"
-       ry="2" />
-    <rect
-       style="opacity:0.537615;fill:none;fill-rule:evenodd;stroke:#f5f5ff;stroke-width:0.8;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
-       id="rect860"
-       width="322"
-       height="77"
-       x="77"
-       y="74"
-       rx="2"
-       ry="2" />
-</svg>
-`;
 var settings=`<svg
    width="500mm"
    height="210mm"
@@ -827,7 +783,6 @@ var newCommand = function(sMessage, sType){
 		sMessage = sMessage.replace('_target_',target);
 		sMessage = sMessage.replace('_extern_',extern);
 		sMessage = sMessage.replace('_set_',settings);
-		sMessage = sMessage.replace('_rhy_',rhythm);	
 		sMessage = sMessage.replace('_vcfa_',vcfa);
 		sMessage = sMessage.replace("_sample_",samplebg)
 		sMessage = sMessage.replace("_adsr_",adsrbg)
@@ -914,6 +869,12 @@ var newCommand = function(sMessage, sType){
 			if (sElemType === 'boolean'){
 				oMods.value = (sMessage === "on");
 			}
+			if(sId=='170')
+			{
+				console.log(sId);
+				console.log(sElemType);
+				console.log(sMessage);
+			}
 			if (sElemType in {'string':0,'digital':0}){
 				oMods.value = sMessage.replace(/`/g, ''); //remove grave accents. g: global to delete all matches
 			}
@@ -966,7 +927,6 @@ var newCommand = function(sMessage, sType){
 			oNewElement.asOptions = [];
 			while (aux = /^`[^`]+`/.exec(sMessage)){ //while there are options inside sMessage. exec returns null or a non-empty array
 				oNewElement.asOptions.push(aux[0].slice(1,-1)); //get the option without grave accents
-		//		console.log(aux[0].slice(1,-1));
 				sMessage = sMessage.replace(/^`[^`]+`/, ''); //remove the first option with grave accents
 				sMessage = sMessage.replace(/^,/, ''); //remove the first ','
 			}

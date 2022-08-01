@@ -16,7 +16,7 @@
  */
 var httpServer = require('./http-server.js');
 var io = require('socket.io');
-var arduino = require('./arduino-communication');
+var arduino = require('./windows-communication');
 var board = require('../board.js');
 var myutilities = require('../myutilities.js');
 

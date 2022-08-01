@@ -97,8 +97,8 @@ var _onNewMessage = function(oData, oBrowser){
 			var oControl = board.getElementById(oData.sId);
 			var sArduinoCommand = 'ACTION:'+oData.sId+',';
 			var oMods = null;
-//		console.log('From browser: '+JSON.stringify(oData));
-//		console.log('From browser: '+JSON.stringify(oControl.sType));
+		console.log('From browser: '+JSON.stringify(oData));
+		console.log('From browser: '+JSON.stringify(oControl.sType));
 			if (oControl.sType === "switches"){
 				if (oData.value.length !== oControl.value.length){
 					throw new Error('The number of switches is not correct.');
@@ -130,9 +130,9 @@ var _onNewMessage = function(oData, oBrowser){
 				if (oData.sType){
 					sArduinoCommand += ','+oData.sType;
 				}
-	//	arduino.send(sArduinoCommand+'\n');
-	//	console.log('arduino browser: '+JSON.stringify(sArduinoCommand));
-	//	return true;
+		arduino.send(sArduinoCommand+'\n');
+		console.log('arduino browser: '+JSON.stringify(sArduinoCommand));
+		return true;
 			}
 			else{
 				throw new Error('Unknown type of control '+JSON.stringify(oControl.sType));
