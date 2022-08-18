@@ -85,19 +85,7 @@ var oDom = (function(){
 			}catch(err){
 				//console.log();
 			}
-			if (bNative&&className==='hor'){
-				eInput = document.createElement('input');
-				eInput.type = 'range';
-				eInput.min = "0";
-				eInput.max = "100";
-				eInput.step = "4";
-				eInput.value = ((((100)/(oElement.nMax - oElement.nMin))*oElement.value) + (100 - oElement.nMax*(100/(oElement.nMax - oElement.nMin))));
-				eInput.className = "analoghor";
-				eDiv.appendChild(eInput);
-				eDiv.className += ' analoghor';
-			}
-			else
-			if (bNative&&className!='hor'){
+			if (bNative){
 				eInput = document.createElement('input');
 				eInput.type = 'range';
 				eInput.min = "0";
@@ -115,7 +103,24 @@ var oDom = (function(){
 				eDiv.appendChild(eInput);
 			}
 		}
-		else if(className==='edit')
+		else if (oElement.sType === 'string'){
+//			eInput = document.createElement('input');
+//			eInput.type = 'text';
+//			eInput.className = "string";
+//			eInput.value = oElement.value;
+			if(className!='edit')
+			{
+				eInput = document.createElement('input');
+				eInput.type = 'text';
+				eInput.className = "string";
+				eInput.cols=120;
+				var value = myArray[5];
+				eInput.value = value;
+				eDiv.appendChild(eTitle);
+				eDiv.appendChild(eInput);
+				eDiv.className += ' string';
+			}
+			else			if(className==='edit')
 			{
 			eInput = document.createElement('textarea');
 			eInput.type = 'text';
@@ -123,33 +128,13 @@ var oDom = (function(){
 			eInput.cols=120;
 			eInput.rows=10;
 			var value = myArray[5];
-			if(value.indexOf('&')>-1)
-			{
-				value = value.replaceAll('&','\n');
-				value = value.replaceAll(';',',');
-			}
 			eInput.value = value;
-//			eButton = document.createElement('button');
-//			eButton.innerHTML = 'Send';
+			eButton = document.createElement('button');
+			eButton.innerHTML = 'Send';
 
 			eDiv.appendChild(eTitle);
 			eDiv.appendChild(eInput);
-//			eDiv.appendChild(eButton);
-			eDiv.className = 'control';
-			}
-	else if (oElement.sType === 'string'){
-			if(className!='scroll')
-			{
-			eInput = document.createElement('input');
-			eInput.type = 'text';
-			eInput.className = "string";
-			var value = myArray[5];
-			eInput.value = value;
-//			eButton = document.createElement('button');
-//			eButton.innerHTML = 'Send';
-			eDiv.appendChild(eTitle);
-			eDiv.appendChild(eInput);
-//			eDiv.appendChild(eButton);
+			eDiv.appendChild(eButton);
 			eDiv.className += ' string';
 			}
 			else
@@ -412,8 +397,8 @@ async function read(input) {
 		}
 	};
 	var setEvents = function(){
-		$('div#wrapper>div#body').click(function(oEvent){
-		console.log(oEvent.target.parentNode.className);
+		$('div#wrapper>div#body').click(function(oEvent){ //buttons and switches and string
+//		console.log(oEvent.target.parentNode.className);
 			if (oEvent.target.tagName.toLowerCase() === 'button' && $(oEvent.target.parentNode).hasClass('buttons')){ //button
 				window.oNodecom.newInputEvent({
 					'sCommand': 'event',
@@ -421,7 +406,7 @@ async function read(input) {
 					'sWitch': parseInt(oEvent.target.className.slice(3), 10) //the class is eg 'btn0'
 				});
 			}
-			else if (oEvent.target.tagName.toLowerCase() === 'input' && (oEvent.target.name === 'onoffswitch'||oEvent.target.name === 'noonoffswitch')){ //switch
+			else if ((oEvent.target.tagName.toLowerCase() === 'input'||oEvent.target.tagName.toLowerCase() === 'textarea' ) && (oEvent.target.name === 'onoffswitch'||oEvent.target.name === 'noonoffswitch')){ //switch
 				var aValues = [], sId;
 				sId = oEvent.target.parentNode.parentNode.id;
 				for (var i = 0; i < $('div#'+sId+' input').length; i++) {
@@ -438,9 +423,8 @@ async function read(input) {
 				});
 				//console.dir(oBoard.getElements());
 			}
-			else if (oEvent.target.tagName.toLowerCase() === 'button'){ //string     && $(oEvent.target.parentNode).hasClass('string')
-			var otp=oEvent.target.parentNode;
-	//			if($(oEvent.target.parentNode).hasClass('control'))
+			else if (oEvent.target.tagName.toLowerCase() === 'button'&&$(oEvent.target.parentNode).hasClass('string')){ //string     && $(oEvent.target.parentNode).hasClass('string')
+				if($(oEvent.target.parentNode).hasClass('control'))
 				{
 					var sDivId = oEvent.target.parentNode.id;
 					var eInputText = $('div#'+sDivId+' textarea')[0];
@@ -454,21 +438,6 @@ async function read(input) {
 						'value': eInputText.value
 					});
 				}
-				if($(oEvent.target.parentNode).hasClass('textarea'))
-				{
-					var sDivId = oEvent.target.parentNode.id;
-					var eInputText = $('div#'+sDivId+' textarea')[0];
-					window.oNodecom.newInputEvent({
-						'sCommand': 'event',
-						'sId': sDivId,
-						'value': eInputText.value
-					});
-					window.oBoard.updateElement({
-						'sId': sDivId,
-						'value': eInputText.value
-					});
-				}
-
 				if($(oEvent.target.parentNode).hasClass('scroll'))
 				{
 					var element = document.getElementById('importbox');
@@ -516,7 +485,7 @@ async function read(input) {
 
 		var handleAnalogAndOptions = function(oEvent, ui){
 				console.log(oEvent.target.parentNode.id);
-			if ($(oEvent.target).hasClass('analog')||$(oEvent.target).hasClass('analoghor') || typeof ui === 'object'){ //range or slider
+			if ($(oEvent.target).hasClass('analog') || typeof ui === 'object'){ //range or slider
 				console.log('slider');
 				var sId = oEvent.target.parentNode.id;
 				var oControl = window.oBoard.getElementById(sId);
@@ -556,6 +525,19 @@ async function read(input) {
 					'value': oEvent.target.value
 				});
 			}
+			else if (oEvent.target.tagName.toLowerCase() === 'button' && $(oEvent.target.parentNode).hasClass('string')){ //string
+				var sDivId = oEvent.target.parentNode.id;
+				var eInputText = $('div#'+sDivId+' input')[0];
+				window.oNodecom.newInputEvent({
+					'sCommand': 'event',
+					'sId': sDivId,
+					'value': eInputText.value
+				});
+				window.oBoard.updateElement({
+					'sId': sDivId,
+					'value': eInputText.value
+				});
+			}
 			//else{
 				//console.log('Neither analog nor options !!!');
 			//}
@@ -566,17 +548,12 @@ async function read(input) {
 		$('div#wrapper>div#body').on("input", handleAnalogAndOptions); //analog slider (firefox ie)
 
 		$('div#wrapper>div#body').keyup(function(oEvent){ //string
-			if(oEvent.keyCode ===13||oEvent.keyCode ===27||oEvent.keyCode ===112){ //enter key
+			if(oEvent.code ===13){ //return key
 				if ($(oEvent.target).hasClass('string')){
-					var value=oEvent.target.value;
-					if(oEvent.keyCode ===27)
-						value='Esc'+value;
-					if(oEvent.keyCode ===112)
-						value='F1'+value;
 					window.oNodecom.newInputEvent({
 						'sCommand': 'event',
 						'sId': oEvent.target.parentNode.id,
-						'value': value
+						'value': oEvent.target.value
 					});
 					window.oBoard.updateElement({
 						'sId': oEvent.target.parentNode.id,

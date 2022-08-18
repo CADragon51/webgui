@@ -562,7 +562,7 @@ var rhythm=`<svg
 <rect
        style="display:inline;opacity:0.888073;fill:none;fill-rule:evenodd;stroke:#00090a;stroke-width:0.8;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
        id="rect860-4"
-       width="360"
+       width="370"
        height="90"
        x="78"
        y="-24"
@@ -571,7 +571,7 @@ var rhythm=`<svg
     <rect
        style="opacity:0.537615;fill:none;fill-rule:evenodd;stroke:#f5f5ff;stroke-width:0.8;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
        id="rect860"
-       width="362"
+       width="372"
        height="92"
        x="77"
        y="-25"
@@ -842,9 +842,9 @@ var newCommand = function(sMessage, sType){
 		sMessage = sMessage.replaceAll('_x@',tx);
 		sMessage = sMessage.replaceAll('_y@',ty);
 		sMessage = sMessage.replaceAll('_w@',sw);
-		sMessage = sMessage.replaceAll('~','\n');	
-		sMessage=sMessage.replace("`,options127,",longopt);
+		sMessage = sMessage.replaceAll('~','\n');
 
+		sMessage=sMessage.replace("`,options127,",longopt);
         var c1=sMessage.indexOf("`");
         var c2=sMessage.lastIndexOf("`");
 		if(sType === 'SetMonitor1'||sType === 'SetMonitor2'||sType === 'SetMonitor3')

@@ -270,13 +270,19 @@ control buttons ui-draggable {
  top:-75px;
   draggable:false;
  }
-input[type="range"] {
+.analog input[type="range"] {
   writing-mode: bt-lr;
    width: 150px;
   height:150px;
   margin: 0;
 accent-color: #F55050;
    transform: rotateZ(270deg);
+}
+.analoghor input[type="range"] {
+  width: 220px;
+  height:50px;
+  margin: 0;
+accent-color: #F55050;
 }
 pre {
 width: 100;
@@ -428,7 +434,7 @@ input[type=checkbox]{
 }
 
 textarea {
-//	z-index: 10;
+	z-index: 10000;
 	backgroud: opaq
 }
 
@@ -770,87 +776,4 @@ div#connexion-status div.circle.connected{
 }
 div#connexion-status div.circle.disconnected{
 	background-color: red;
-}
-/*
- Only custom marker for summary/details
- For cross browser compatible styling hide Firefox's marker by setting summary { display: block }
- and Chrome and Safari's marker by setting ::-webkit-details-marker {display: none;}
-*/
-summary {
-  display: block;
-  cursor: pointer;
-  outline: 0; 
-}
-
-summary::-webkit-details-marker {
-    display: none;
-  }
-
-
-.tree-nav__item {
-  display: block;
-  white-space: nowrap;
-  color: #fff;
-  position: relative;
-  font-size:1rem;
-}
-.tree-nav__item.is-expandable::before {
-  border-left: 1px solid #333;
-  content: "";
-  height: 100%;
-  left: 1rem;
-  position: absolute;
-  top: 1.2em;
-  height: calc(100% - 2.4rem);
-}
-.tree-nav__item .tree-nav__item {
-  margin-left: 2.4rem;
-}
-.tree-nav__item.is-expandable[open] > .tree-nav__item-title::before {
-  transform: rotate(90deg);
-}
-.tree-nav__item.is-expandable > .tree-nav__item-title {
-  padding-left: 2.4rem;
-}
-.tree-nav__item.is-expandable > .tree-nav__item-title::before {
-  position: absolute;
-  will-change: transform;
-  transition: transform 300ms ease;
-  font-family: "Arial";
-  color: #fff;
-  font-size: 1rem;
-  content: '\25B6';
-  left: 0;
-  display: inline-block;
-  width: 1.1rem;
-  text-align: center;
-}
-
-.tree-nav__item-title {
-  cursor: pointer;
-  display: block;
-  outline: 0;
-  color: #fff;
-  font-size: 1rem;
-  line-height: 1em;
-}
-.tree-nav__item-title .icon {
-  display: inline;
-  padding-left: 1.6rem;
-  margin-right: 0.8rem;
-  color: #fff;
-  font-size: 1rem;
-  position: relative;
-}
-.tree-nav__item-title .icon::before {
-  top: 0;
-  position: absolute;
-  left: 0;
-  display: inline-block;
-  width: 0.6em;
-  text-align: center;
-}
-
-.tree-nav__item-title::-webkit-details-marker {
-  display: none;
 }
